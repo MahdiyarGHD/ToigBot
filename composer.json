@@ -1,0 +1,15 @@
+{
+    "name": "mgh/toig-bot",
+    "authors": [
+        {
+            "name": "MahdiyarGHD",
+            "email": "m.gh.1385.mahdiyar@gmail.com"
+        }
+    ],
+    "require": {
+        "webpajooh/telebot": "^1.6"
+    },
+    "autoload": {
+        "files": ["./resources/config.php"]
+    }
+}

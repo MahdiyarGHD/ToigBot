@@ -1,0 +1,72 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1af84c90b65696c7db68df0dfa972c7a",
+    "packages": [
+        {
+            "name": "webpajooh/telebot",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WebPajooh/TeleBot.git",
+                "reference": "ed5a47b664ae1907a0147a0cea28ec4fe1e5a375"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WebPajooh/TeleBot/zipball/ed5a47b664ae1907a0147a0cea28ec4fe1e5a375",
+                "reference": "ed5a47b664ae1907a0147a0cea28ec4fe1e5a375",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "TeleBot\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WebPajooh",
+                    "email": "webpajooh@gmail.com"
+                }
+            ],
+            "description": "A minimal library to develop your new Telegram bot",
+            "keywords": [
+                "telegram",
+                "telegram bot",
+                "telegram bot api",
+                "telegram php",
+                "telegram sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/WebPajooh/TeleBot/issues",
+                "source": "https://github.com/WebPajooh/TeleBot/tree/v1.6.1"
+            },
+            "time": "2023-01-26T13:09:10+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
