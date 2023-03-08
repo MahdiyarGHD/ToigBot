@@ -14,7 +14,7 @@ ini_set('log_errors', TRUE);
 ini_set('error_log', 'errors.log'); 
 
 
-$SUPPORT_ME    = "☕️ support me : \nSUPPORT LINK";
+$SUPPORT_ME    = "";
 
 $START_MESSAGE = "Hi! I'm Toig and I can learn how to speak! You can interact with me using the following commands:
 - <code>/toig</code> : Let me generate a message

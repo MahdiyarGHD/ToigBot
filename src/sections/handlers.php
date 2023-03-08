@@ -250,7 +250,7 @@ class Chat {
         if(random_float_in_range(0,1) * 10 < ($this->torrent_level**2)/10) 
         {
             $dice = random_float_in_range(0,1) * 10;
-            if($dice < 0.01) 
+            if($dice < 0.01 && isset($SUPPORT_ME)) 
             {
                 return [MESSAGE,$SUPPORT_ME];
             } 
