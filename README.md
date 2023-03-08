@@ -1,6 +1,6 @@
-<center>
+<p align="center">
 	<img src="https://i.imgur.com/Wul7sMI.png" height="450" width="350" alt="..." />
-</center>
+</p>
 
 #  🐸 Toig Bot
 
