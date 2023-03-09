@@ -4,7 +4,7 @@
 
 #  🐸 Toig Bot
 
-Toig is a Telegram bot which uses Markov chains to learn how to speak from the messages of users messages. It can answer with text messages, but also stickers, animations.
+Toig is a Telegram bot which uses Markov chain to learn how to speak from users messages. It can answer with text messages, but also stickers, animations.
 
 To work correctly, I need to store these information for each chat:
 - Chat ID
