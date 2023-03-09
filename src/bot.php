@@ -35,7 +35,6 @@ $TSETTING      = "To work correctly, I need to store these information for each 
 I don`t store any information about users, such as user ID, username, profile picture...
 Data are automatically deleted after 90 days of inactivity.
 Further commands can be used to better control your data:
-- <code>/tsetting download</code> : Retrieve the data for the current chat on a text file.
 - <code>/tsetting delete</code> : Remove all data for the current chat. NOTE: this operation is irreversible and you will NOT be asked a confirmation!
 - <code>/tsetting flag</code> : Reply to a sticker or a gif with this command to remove it from my memory. This is useful to prevent me from spamming inappropriate content.
 - <code>/tsetting unflag</code> : Allow me to learn a sticker or gif that was previously flagged.
