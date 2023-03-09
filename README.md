@@ -56,7 +56,7 @@ define('DEBUG_MODE', true);
 
 ```
 
-Also you can change SUPPORT_ME variable in `src/bot.php` if you want bot to send a supprt link (...) randomly.
+Also you can change `$SUPPORT_ME` variable in `src/bot.php` if you want bot to send a support link (...) randomly.
 
 ## ⁉️ What is assuring me that you won't read my private messages?
 Toig is not storing the whole messages, but only the words composing them, so it is not technically possible to recover the original messages. Anyway, I would like to remark that, whenever you use a Telegram bot which has access to all messages you send, you are accepting the risk that the bot owner will use your data unfairly. If you use a bot which is closed source and you do not know where it is deployed, how it works, what data it stores and even who are the people managing it, nothing can guarantee that the unknown developers are not storing all your conversations in some hidden server.
