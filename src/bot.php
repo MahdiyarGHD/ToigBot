@@ -7,13 +7,6 @@ use MemoryManager,Chat;
 
 require '../vendor/autoload.php';
 
-error_reporting(E_ALL); 
-ini_set('ignore_repeated_errors', TRUE); 
-ini_set('display_errors', FALSE); 
-ini_set('log_errors', TRUE); 
-ini_set('error_log', 'errors.log'); 
-
-
 $SUPPORT_ME    = "";
 
 $START_MESSAGE = "Hi! I'm Toig and I can learn how to speak! You can interact with me using the following commands:
