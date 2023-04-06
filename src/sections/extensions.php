@@ -1,10 +1,7 @@
 <?php
 
 use TeleBot\TeleBot;
-<<<<<<< HEAD
-=======
 use TeleBot\InlineKeyboard;
->>>>>>> c83ce6b (Revert missing dependencies)
 
 function learn_cycle($MemoryManager,$Chat, $tg) {
     $file_id = '';
@@ -47,17 +44,11 @@ function reply($tg, $Chat) {
         $type_of_reply = $reply[0];
         $content = $reply[1];
         
-<<<<<<< HEAD
-        if($content !== "") {
-            
-            if($type_of_reply == MESSAGE) 
-=======
         $filters = $Chat->get_chat_filters();
         
         if($content !== "") {
             
             if($type_of_reply == MESSAGE && !$filters[MESSAGE]) 
->>>>>>> c83ce6b (Revert missing dependencies)
             {
                 $tg->sendMessage([
                     'chat_id' => $tg->message->chat->id,
@@ -65,11 +56,7 @@ function reply($tg, $Chat) {
                 ]);
             }
             
-<<<<<<< HEAD
-            elseif($type_of_reply == STICKER) 
-=======
             elseif($type_of_reply == STICKER && !$filters[STICKER]) 
->>>>>>> c83ce6b (Revert missing dependencies)
             {
                 $tg->sendSticker([
                     'chat_id' => $tg->message->chat->id,
@@ -77,11 +64,7 @@ function reply($tg, $Chat) {
                 ]);
             } 
             
-<<<<<<< HEAD
-            elseif($type_of_reply == ANIMATION)
-=======
             elseif($type_of_reply == ANIMATION && !$filters[ANIMATION])
->>>>>>> c83ce6b (Revert missing dependencies)
             {
                 $tg->sendAnimation([
                     'chat_id' => $tg->message->chat->id,
@@ -333,10 +316,6 @@ function tsetting($command) {
                         
                         $item = $tg->message->reply_to_message->animation->file_id;
                         $unique_id = $tg->message->reply_to_message->animation->file_unique_id;
-<<<<<<< HEAD
-                        
-=======
->>>>>>> c83ce6b (Revert missing dependencies)
                     }
                     
                     $Chat->flag($item,$unique_id);
@@ -419,10 +398,7 @@ function tsetting($command) {
             }
             
             break;
-<<<<<<< HEAD
-=======
-            
-            
+      
         case 'filter':
             
             $filters = $Chat->get_chat_filters();
@@ -448,7 +424,6 @@ function tsetting($command) {
             ]);   
             
             break;
->>>>>>> c83ce6b (Revert missing dependencies)
     
     }
     
@@ -466,8 +441,6 @@ function sync() {
     
 }
 
-<<<<<<< HEAD
-=======
 function filter_messages($type, $from_id) {
     global $Chat,$tg,$MemoryManager;
     
@@ -513,7 +486,6 @@ function filter_messages($type, $from_id) {
     }
 }
 
->>>>>>> c83ce6b (Revert missing dependencies)
 TeleBot::extend('isSticker', function () {
     if($this->message) {
         return property_exists($this->message, 'sticker');
