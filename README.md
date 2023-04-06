@@ -6,13 +6,13 @@
 
 Toig is a Telegram bot which uses Markov chain to learn how to speak from users messages. It can answer with text messages, but also stickers, animations.
 
-To work correctly, Toig needs to store these information for each chat:
+To work correctly, I need to store these information for each chat:
 - Chat ID
 - Sent words
 - Sent stickers
 - Sent gifs
 
-Toig doesn`t store any information about users, such as user ID, username, profile picture
+I don`t store any information about users, such as user ID, username, profile picture
 and data are automatically deleted after 90 days of inactivity.
 
  <br>
