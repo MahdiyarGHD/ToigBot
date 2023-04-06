@@ -43,6 +43,11 @@ class MemoryManager {
                 $chat->stickers = $json['stickers'] ?? [];
                 $chat->animations = $json['animations'] ?? [];
                 $chat->flagged_media = $json['flagged_media'] ?? [];
+<<<<<<< HEAD
+=======
+                $chat->filters = $json['filters'] ?? [];
+
+>>>>>>> c83ce6b (Revert missing dependencies)
                 $chat->last_update = $json['last_update'] ?? time();
                 
                 $this->chats[$filename] = $chat->get_chat_properties();
@@ -153,6 +158,10 @@ class Chat {
     public $stickers = [];
     public $animations = [];
     public $flagged_media = [];
+<<<<<<< HEAD
+=======
+    public $filters = [];
+>>>>>>> c83ce6b (Revert missing dependencies)
     public $last_update = [];
     
     private $debug_msg = "default debug message";
@@ -165,6 +174,10 @@ class Chat {
         $this->stickers = $chat['stickers'] ?? [];
         $this->animations = $chat['animations'] ?? [];
         $this->flagged_media = $chat['flagged_media'] ?? [];
+<<<<<<< HEAD
+=======
+        $this->filters = $chat['filters'] ?? [];
+>>>>>>> c83ce6b (Revert missing dependencies)
         $this->last_update = $chat['last_update'] ?? time();
     }
 
@@ -176,6 +189,10 @@ class Chat {
             'stickers' => $this->stickers,
             'animations' => $this->animations,
             'flagged_media' => $this->flagged_media,
+<<<<<<< HEAD
+=======
+            'filters' => $this->filters,
+>>>>>>> c83ce6b (Revert missing dependencies)
             'last_update' => $this->last_update
         ];
     }
@@ -390,10 +407,37 @@ class Chat {
             unset($this->flagged_media[array_search($unique_id,$this->flagged_media)]);
         }
         
+<<<<<<< HEAD
         $this->debug_msg = $this->get_chat_properties();
         
     }
     
+=======
+        // $this->debug_msg = $this->get_chat_properties();
+        
+    }
+    
+    public function get_chat_filters() : array {
+        $filters = [
+            MESSAGE => in_array(MESSAGE, $this->filters),
+            STICKER => in_array(STICKER, $this->filters),
+            ANIMATION => in_array(ANIMATION, $this->filters)
+        ];
+        
+        return $filters;
+    }
+    
+    
+    public function update_filters(array $filters) : void {
+        
+        $filtersMigrate = [];
+        if ($filters[MESSAGE])   $filtersMigrate[] = MESSAGE;
+        if ($filters[STICKER])   $filtersMigrate[] = STICKER;
+        if ($filters[ANIMATION]) $filtersMigrate[] = ANIMATION;
+        
+        $this->filters = $filtersMigrate;
+    }
+>>>>>>> c83ce6b (Revert missing dependencies)
     
     public function get_chat_usage() : array {
         

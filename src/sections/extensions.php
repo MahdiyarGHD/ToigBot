@@ -1,6 +1,10 @@
 <?php
 
 use TeleBot\TeleBot;
+<<<<<<< HEAD
+=======
+use TeleBot\InlineKeyboard;
+>>>>>>> c83ce6b (Revert missing dependencies)
 
 function learn_cycle($MemoryManager,$Chat, $tg) {
     $file_id = '';
@@ -43,9 +47,17 @@ function reply($tg, $Chat) {
         $type_of_reply = $reply[0];
         $content = $reply[1];
         
+<<<<<<< HEAD
         if($content !== "") {
             
             if($type_of_reply == MESSAGE) 
+=======
+        $filters = $Chat->get_chat_filters();
+        
+        if($content !== "") {
+            
+            if($type_of_reply == MESSAGE && !$filters[MESSAGE]) 
+>>>>>>> c83ce6b (Revert missing dependencies)
             {
                 $tg->sendMessage([
                     'chat_id' => $tg->message->chat->id,
@@ -53,7 +65,11 @@ function reply($tg, $Chat) {
                 ]);
             }
             
+<<<<<<< HEAD
             elseif($type_of_reply == STICKER) 
+=======
+            elseif($type_of_reply == STICKER && !$filters[STICKER]) 
+>>>>>>> c83ce6b (Revert missing dependencies)
             {
                 $tg->sendSticker([
                     'chat_id' => $tg->message->chat->id,
@@ -61,7 +77,11 @@ function reply($tg, $Chat) {
                 ]);
             } 
             
+<<<<<<< HEAD
             elseif($type_of_reply == ANIMATION)
+=======
+            elseif($type_of_reply == ANIMATION && !$filters[ANIMATION])
+>>>>>>> c83ce6b (Revert missing dependencies)
             {
                 $tg->sendAnimation([
                     'chat_id' => $tg->message->chat->id,
@@ -313,7 +333,10 @@ function tsetting($command) {
                         
                         $item = $tg->message->reply_to_message->animation->file_id;
                         $unique_id = $tg->message->reply_to_message->animation->file_unique_id;
+<<<<<<< HEAD
                         
+=======
+>>>>>>> c83ce6b (Revert missing dependencies)
                     }
                     
                     $Chat->flag($item,$unique_id);
@@ -396,6 +419,36 @@ function tsetting($command) {
             }
             
             break;
+<<<<<<< HEAD
+=======
+            
+            
+        case 'filter':
+            
+            $filters = $Chat->get_chat_filters();
+            $from_id = $tg->message->from->id;
+            $icons = [
+                MESSAGE => $filters[MESSAGE] === false ? '✅ ' : '❌ ',
+                STICKER => $filters[STICKER] === false ? '✅ ' : '❌ ',
+                ANIMATION => $filters[ANIMATION] === false ? '✅ ' : '❌ '
+            ];
+            
+            $keyboard = (new InlineKeyboard())
+            ->addCallbackButton($icons[MESSAGE] . MESSAGE, "fl-Message-$from_id")
+            ->addCallbackButton($icons[STICKER] . STICKER, "fl-Sticker-$from_id")
+            ->addCallbackButton($icons[ANIMATION] . ANIMATION, "fl-Animation-$from_id")
+            ->chunk(1)
+            ->rightToLeft()
+            ->get();
+            
+            $tg->sendMessage([
+                'chat_id' => $tg->message->chat->id,
+                'text' => "AHA // Toggle message types you want to filter",
+                'reply_markup' => $keyboard
+            ]);   
+            
+            break;
+>>>>>>> c83ce6b (Revert missing dependencies)
     
     }
     
@@ -413,6 +466,54 @@ function sync() {
     
 }
 
+<<<<<<< HEAD
+=======
+function filter_messages($type, $from_id) {
+    global $Chat,$tg,$MemoryManager;
+    
+    if($tg->callback_query->from->id == $from_id) 
+    {  
+        $Chat->load(array_merge($MemoryManager->get_chat_from_id($tg->message->chat->id) , ['chat_id' => $tg->message->chat->id]));
+        $filters = $Chat->get_chat_filters();
+        
+        if ($type === MESSAGE)   $filters[MESSAGE] = !$filters[MESSAGE];
+        if ($type === STICKER)   $filters[STICKER] = !$filters[STICKER];
+        if ($type === ANIMATION) $filters[ANIMATION] = !$filters[ANIMATION];
+        
+        $Chat->update_filters($filters);
+        
+        $MemoryManager->load_single_chat($tg->message->chat->id, $Chat->get_chat_properties());
+        $MemoryManager->sync_data();
+            
+        $icons = [
+            MESSAGE => $filters[MESSAGE] === false ? '✅ ' : '❌ ',
+            STICKER => $filters[STICKER] === false ? '✅ ' : '❌ ',
+            ANIMATION => $filters[ANIMATION] === false ? '✅ ' : '❌ '
+        ];
+        
+        $keyboard = (new InlineKeyboard())
+        ->addCallbackButton($icons[MESSAGE] . MESSAGE, "fl-Message-$from_id")
+        ->addCallbackButton($icons[STICKER] . STICKER, "fl-Sticker-$from_id")
+        ->addCallbackButton($icons[ANIMATION] . ANIMATION, "fl-Animation-$from_id")
+        ->chunk(1)
+        ->rightToLeft()
+        ->get();
+        
+        $tg->editMessageReplyMarkup([
+            'message_id' => $tg->message->message_id,
+            'chat_id' => $tg->message->chat->id,
+            'reply_markup' => $keyboard
+        ]);   
+        
+    } else {
+        $tg->answerCallbackQuery([
+            'callback_query_id' => $tg->callback_query->id,
+            'text' => 'You don`t have permission to do this'
+        ]);
+    }
+}
+
+>>>>>>> c83ce6b (Revert missing dependencies)
 TeleBot::extend('isSticker', function () {
     if($this->message) {
         return property_exists($this->message, 'sticker');
