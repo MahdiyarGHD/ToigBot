@@ -31,11 +31,7 @@ And there are a number of extra commands that can be issued through `/tsetting`,
 
 - `/tsetting delete`: Erase the entire content of the current chat in one shot. Be careful when using this function: the deletion of your data will happen without asking confirmation and is not reversible, so do it wisely.
 - `/tsetting flag`:  Remove a specific sticker or gif from Toig' memory. Let's say some troll publishes a porn gif in your group. Instead of deleting it, reply to it with `/tsetting flag`, this way the gif will be removed from the bot's memory and Toig won't publish it again later. The operation can be undone with `/tsetting unflag`
-<<<<<<< HEAD
-- `/tsetting filter` : With this command, you can specify the type of messages I send.
-=======
 - `/tsetting filter`: With this command, you can specify the type of messages I send.
->>>>>>> c83ce6b (Revert missing dependencies)
 
 Since this bot has access to private messages of Telegram group users, it has been designed with a high focus on openness and transparency to guarantee that private data are not used in an improper way. The simple act of making the source code public is already a great step towards this goal, a step which has not been made by other bots similar to Toig. (except [Fioriktos](https://github.com/FiorixF1/fioriktos-bot) 😁)
 
