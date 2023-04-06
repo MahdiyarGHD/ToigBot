@@ -1,7 +1,14 @@
 <?php
 
 use TeleBot\TeleBot;
+use TeleBot\InlineKeyboard;
 use TeleBot\Exceptions\TeleBotException;
+
+// error_reporting(E_ALL); 
+// ini_set('ignore_repeated_errors', TRUE); 
+// ini_set('display_errors', FALSE); 
+// ini_set('log_errors', TRUE); 
+// ini_set('error_log', 'errors.log'); 
 
 use MemoryManager,Chat;
 
@@ -31,6 +38,7 @@ Further commands can be used to better control your data:
 - <code>/tsetting delete</code> : Remove all data for the current chat. NOTE: this operation is irreversible and you will NOT be asked a confirmation!
 - <code>/tsetting flag</code> : Reply to a sticker or a gif with this command to remove it from my memory. This is useful to prevent me from spamming inappropriate content.
 - <code>/tsetting unflag</code> : Allow me to learn a sticker or gif that was previously flagged.
+- <code>/tsetting filter</code> : With this command, you can specify the type of messages I send.
 For more information, visit https://www.github.com/MahdiyarGHD/ToigBot.git or contact my developer @MahdiyarDev.\n\n {$SUPPORT_ME}";
 
 
@@ -44,93 +52,98 @@ try {
     $tg->setDefaults('sendMessage', ['parse_mode' => 'html']); 
 
     if(in_array($tg->chat->id,CHAT_ID) || !CHAT_ID) {
-        
         // chat pre-proccessing & bot cycle
-        
+
         $MemoryManager = new MemoryManager();
         $Chat = new Chat();
-        
-        if(isset($tg->message->chat->id)) {   
-            $Chat->load(array_merge($MemoryManager->get_chat_from_id($tg->message->chat->id) , ['chat_id' => $tg->message->chat->id]));
-        }
-        
-        if($tg->isText() || $tg->isSticker() || $tg->isAnimation()) 
-        {
-            if($tg->isCommand() === 0) {
-                learn_cycle($MemoryManager, $Chat, $tg);        
-                reply($tg,$Chat);
+                         
+        if($tg->message->from->username != BOT_ID) {
+
+            if(isset($tg->message->chat->id)) {   
+                $Chat->load(array_merge($MemoryManager->get_chat_from_id($tg->message->chat->id) , ['chat_id' => $tg->message->chat->id]));
             }
-        }
+            
+            if($tg->isText() || $tg->isSticker() || $tg->isAnimation()) 
+            {
+                if($tg->isCommand() === 0) {
+                    learn_cycle($MemoryManager, $Chat, $tg);        
+                    reply($tg,$Chat);
+                }
+            }
+
+            
+            // command handlers
+            
+            $tg->listen('/start', 'start' ,false);
+            $tg->listen('/start@' . BOT_ID, 'start' ,false);
+            
+            
+            $tg->listen('/torrent %d', 'set_torrent', false);
+            $tg->listen('/torrent@' . BOT_ID . ' %d', 'set_torrent', false);
+            
+            
+            $tg->listen('/toig', 'toig' , false);
+            $tg->listen('/toig@' . BOT_ID, 'toig' , false);
+            
+                    
+            $tg->listen('/sticker', 'send_sticker', false);
+            $tg->listen('/sticker@' . BOT_ID, 'send_sticker', false);
+                    
+                    
+            $tg->listen('/gif', 'send_gif', false);
+            $tg->listen('/gif@' . BOT_ID, 'send_gif', false);
+            
+                            
+            $tg->listen('/enablelearning', 'enable_learning', false);
+            $tg->listen('/enablelearning@' . BOT_ID, 'enable_learning', false);
+                
+                            
+            $tg->listen('/disablelearning', 'disable_learning', false);
+            $tg->listen('/disablelearning@' . BOT_ID, 'disable_learning', false);
+            
+            $tg->listen('/strike %s', 'strike', false);
+            $tg->listen('/strike@' . BOT_ID . ' %s', 'strike', false);
+                            
+                            
+            $tg->listen('/strike', 'strike_generate', false);
+            $tg->listen('/strike@' . BOT_ID, 'strike_generate', false);
 
         
-        // command handlers
-        
-        $tg->listen('/start', 'start' ,false);
-        $tg->listen('/start@' . BOT_ID, 'start' ,false);
-        
-        
-        $tg->listen('/torrent %d', 'set_torrent', false);
-        $tg->listen('/torrent@' . BOT_ID . ' %d', 'set_torrent', false);
-        
-        
-        $tg->listen('/toig', 'toig' , false);
-        $tg->listen('/toig@' . BOT_ID, 'toig' , false);
-        
+            
+            $tg->listen('/tsetting', 'tsetting_start', false);
+            $tg->listen('/tsetting@' . BOT_ID, 'tsetting_start', false);
+            
                 
-        $tg->listen('/sticker', 'send_sticker', false);
-        $tg->listen('/sticker@' . BOT_ID, 'send_sticker', false);
+            $tg->listen('/tsetting %s', 'tsetting', false);
+            $tg->listen('/tsetting@' . BOT_ID . ' %s', 'tsetting', false);        
+            
+            if($tg->isAdded()) {
+                start();
+            }
+            
                 
+            if ($tg->message->from->id == OWNER_ID) {
                 
-        $tg->listen('/gif', 'send_gif', false);
-        $tg->listen('/gif@' . BOT_ID, 'send_gif', false);
-        
-                        
-        $tg->listen('/enablelearning', 'enable_learning', false);
-        $tg->listen('/enablelearning@' . BOT_ID, 'enable_learning', false);
-              
-                        
-        $tg->listen('/disablelearning', 'disable_learning', false);
-        $tg->listen('/disablelearning@' . BOT_ID, 'disable_learning', false);
-           
-        $tg->listen('/strike %s', 'strike', false);
-        $tg->listen('/strike@' . BOT_ID . ' %s', 'strike', false);
-                        
-                        
-        $tg->listen('/strike', 'strike_generate', false);
-        $tg->listen('/strike@' . BOT_ID, 'strike_generate', false);
+                $tg->listen('sync();', 'sync', true);
+                
+            }
+                
+            // Automatic sync(); 
+            
+            $dice = random_float_in_range(0,1) * 10;
+            if ($dice < 0.01) {
+                $MemoryManager->synchronize();
+            }
 
-     
-        
-        $tg->listen('/tsetting', 'tsetting_start', false);
-        $tg->listen('/tsetting@' . BOT_ID, 'tsetting_start', false);
-        
-            
-        $tg->listen('/tsetting %s', 'tsetting', false);
-        $tg->listen('/tsetting@' . BOT_ID . ' %s', 'tsetting', false);
-        
-        
-        if($tg->isAdded()) {
-            start();
         }
-        
+
+        // callback queries
+        $tg->listen('fl-%s-%d', 'filter_messages', false);        
             
-        if ($tg->message->from->id == OWNER_ID) {
-            
-            $tg->listen('sync();', 'sync', true);
-            
-        }
-            
-        // Automatic sync(); 
-        
-        $dice = random_float_in_range(0,1) * 10;
-        if ($dice < 0.01) {
-            $MemoryManager->synchronize();
-        }
-        
-        
-        $MemoryManager->sync_data();
     }
-    
+        
+    $MemoryManager->sync_data();
+
     unset($MemoryManager);
     unset($Chat);
 
