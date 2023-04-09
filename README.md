@@ -66,7 +66,7 @@ Toig is not storing the whole messages, but only the words composing them, so it
 ### ✅ Todo
 - [x] Push first version of Toig
 - [x] Update readme
-- [ ] Add new commands that can be used by users to have better control of Toig
+- [x] Add new commands that can be used by users to have better control of Toig
 
 ## 🤝 Contribute
 This project is released and maintained under the GNU General Public License v3.0. Anyone can contribute to modify, improve, or add new features to this project. There are no obstacles to creating different forks of the project and developing it in a separate branch, whether free or commercial.
