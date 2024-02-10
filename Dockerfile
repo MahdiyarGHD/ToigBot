@@ -1,11 +1,11 @@
-FROM php:8.0-slim
+FROM php:8.0-apache
 
-WORKDIR /var/www/html
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY start-apache /usr/local/bin
+RUN a2enmod rewrite
 
-VOLUME ["/var/www/html"]
+# Copy application source
+COPY . /var/www/
+RUN chown -R www-data:www-data /var/www
 
-COPY . /var/www/html
-
-EXPOSE 80
-
-CMD ["service", "nginx", "restart"]  # Or adjust for Apache
+CMD ["start-apache"]
