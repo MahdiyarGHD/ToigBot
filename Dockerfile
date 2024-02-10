@@ -1,11 +1,19 @@
+# Use an official PHP runtime as a parent image
 FROM php:8.0-apache
 
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY start-apache /usr/local/bin
-RUN a2enmod rewrite
+# Set the working directory in the container
+WORKDIR /var/www/html
 
-# Copy application source
-COPY . /var/www/
-RUN chown -R www-data:www-data /var/www
+# Copy your PHP application code into the container
+COPY . .
 
-CMD ["start-apache"]
+# Install PHP extensions and other dependencies
+RUN apt-get update && \
+    apt-get install -y libpng-dev && \
+    docker-php-ext-install pdo pdo_mysql gd
+
+# Expose the port Apache listens on
+EXPOSE 80
+
+# Start Apache when the container runs
+CMD ["apache2-foreground"]
