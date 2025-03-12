@@ -1,19 +1,15 @@
-# Use an official PHP runtime as a parent image
-FROM php:8.0-apache
+FROM richarvey/nginx-php-fpm:3.1.6
 
-# Set the working directory in the container
-WORKDIR /var/www/html
-
-# Copy your PHP application code into the container
 COPY . .
 
-# Install PHP extensions and other dependencies
-RUN apt-get update && \
-    apt-get install -y libpng-dev && \
-    docker-php-ext-install pdo pdo_mysql gd
+# Image config
+ENV SKIP_COMPOSER 1
+ENV WEBROOT /var/www/html/public
+ENV PHP_ERRORS_STDERR 1
+ENV RUN_SCRIPTS 1
+ENV REAL_IP_HEADER 1
 
-# Expose the port Apache listens on
-EXPOSE 80
+# Allow composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Start Apache when the container runs
-CMD ["apache2-foreground"]
+CMD ["/start.sh"]
