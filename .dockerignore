@@ -1,0 +1,6 @@
+.git
+.github
+vendor
+data/chat-data/*.json
+*.log
+README.md

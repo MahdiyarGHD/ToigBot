@@ -1,0 +1,10 @@
+services:
+  toigbot:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data/chat-data:/var/www/html/data/chat-data
+      - ./resources/config.php:/var/www/html/resources/config.php:ro
+    restart: unless-stopped
