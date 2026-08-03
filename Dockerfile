@@ -1,7 +1,7 @@
 FROM composer:2 AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction --no-progress
+RUN composer install --no-dev --prefer-install=source --no-interaction --no-progress
 
 FROM php:8.3-apache
 WORKDIR /var/www/html
